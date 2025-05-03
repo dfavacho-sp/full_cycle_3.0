@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+
+  laravel:
+    image: dayvisonfavacho/laravel-prod
+    build:
+      context: ./laravel
+      dockerfile: Dockerfile.prod
+    container_name: laravel
+    networks:
+      - laranet
+
+  nginx:
+    image: dayvisonfavacho/nginx-prod
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile.prod
+    container_name: nginx    
+    networks:
+      - laranet
+    ports:
+      - "8080:80"
+
+networks:
+  laranet:
+    driver: bridge   
